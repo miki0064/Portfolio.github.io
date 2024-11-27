@@ -9,7 +9,6 @@
     font-family: "Inter", sans-serif;
     line-height: 1.7;
     font-size: 20px;
-    /* min-width: 1175px; */
   }
 
 
@@ -28,14 +27,12 @@
     justify-content: center;
   }
 
-  #wrapper {
-    background: #e9ffe4;
-  }
-
   header,
   footer {
+    background: #e9ffe4;
     height: 10vh;
     font-size: 32px;
+    padding: 0 10%;
   }
 
   main {
@@ -46,17 +43,23 @@
 
   /* ヘッダー *************************************************** */
   header {
-    width: 80%;
-    margin: auto;
+    margin: 0 auto;
   }
   .headCover {
     justify-content: space-between;
-
   }
 
   nav ul {
     justify-content: space-evenly;
     gap: 0 2rem;
+  }
+
+  header #menu {
+    display: none;
+    cursor: pointer;
+    position: relative;
+    z-index: 999;
+    user-select: none;
   }
   /* メイン *************************************************** */
   main div:first-child {
@@ -97,11 +100,16 @@
   }
 
   .work {
-    width: 416px;
+    width: fit-content;
+    max-width: 416px;
     margin: 3vh auto;
     border: #000 2px solid;
     border-radius: 5px;
     padding: 1em;
+  }
+
+  .work img {
+    border-radius: 5px;
   }
   
   .work > p:first-of-type {
@@ -112,6 +120,10 @@
     cursor: pointer;
     user-select: none;
     width: fit-content;
+  }
+
+  .description span {
+    font-weight: 900;
   }
 
   .material-icons {
@@ -155,7 +167,7 @@
     margin: 5vh auto;
   }
 
-  /* 小見出し横の線 */
+  /* 小見出し横の線 **************************************/
   .line {
     width: 50%;
   }
@@ -172,7 +184,7 @@
     .line:after {
     margin-left: 10px;
     }
-    /* **************** */
+    /* ************************************* */
 
 
   main section:last-of-type div {
@@ -185,7 +197,8 @@
   }
   main section:last-of-type p:last-child {
     border: 1px solid #000;
-    width: 20em;
+    width: fit-content;
+    padding: 0 1em;
   }
 
   /* TOPボタン ***************************** */
@@ -211,11 +224,6 @@
     transform: translateY(0);
   }
 
-  /* フッター *************************************************** */
-  footer {
-    justify-content: center;
-  }
-
   /* レスポンシブ************************************************************** */
   /* タブレット(960px以下)************************************************************** */
   @media screen and (max-width: 960px){
@@ -226,16 +234,96 @@
       flex-direction: column;
     }
 
+    .headCover,
+    .line {
+      flex-direction: row;
+    }
+
+    .headCover {
+      padding: 0 5%;
+    }
+
     nav {
-      display: none;
+      /* ヘッダー元位置から強制的に移動させる */
+      position: fixed;
+      /* 初期位置を画面外に設定 */
+      top: -100vh;
+      left: 0;
+      /* positionプロパティで失った幅の再設定 */
+      width: 100%;
+      /* 希望の高さに設定 */
+      height: 100vh;
+      /* 今後追加したコンテンツに影響されないように重なり順を指定 */
+      z-index: 99;
+      /* アニメーションを追加する */
+      transition: top .5s ease-out;
+    }
+  
+    /* navにactiveというclassがついている時 */
+    nav.active {
+      /* 初期位置(画面外)から画面内に配置位置を変更する */
+      top: 0;
+    }
+    
+    nav ul {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #fffc;
+      /* 背景をぼかして視認性を向上させる */
+      /* Safariの旧バージョンでも動作するように */
+      -webkit-backdrop-filter: blur( 5px );
+      backdrop-filter: blur( 5px );
+      /* 要素内容の高さから親要素の高さ(親が数値で高さを指定しているとき)に合わせる */
+      height: 100%;
+      gap: 1em 0;
+  }
+
+    header #menu {
+      display: block;
+      width: fit-content;
+      font-size: 1.5em;
     }
 
     section ul p {
       text-align: center;
     }
+
+    .line {
+      width: 90%;
+    }
+
   }
   /* レスポンシブ************************************************************** */
   /* モバイル(420px以下)************************************************************** */
   @media screen and (max-width: 420px){
-    
+    html {
+      min-width: 310px;
+
+    }
+
+    body {
+      font-size: 16px;
+    }
+    header,
+    footer {
+      font-size: 25px;
+    }
+
+    header {
+      width: 100%;
+    }
+
+    .cover {
+      height: 60vh;
+    }
+
+    h1 {
+      font-size: 50px;
+    }
+
+    h2 {
+      font-size: 20px;
+    }
+
   }

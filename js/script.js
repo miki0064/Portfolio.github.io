@@ -37,3 +37,36 @@ window.addEventListener('scroll', () => {
     btn.classList.remove('active');
   }
 });
+
+// ********************************************************************************************
+// ハンバーガーメニュー
+
+// メニューアイコンをcloseに変更する
+const hamburger = document.querySelector( '#menu' );
+const nav = document.querySelector( 'nav' );
+// 初期状態の要素内容を取得
+const hamburgerText = hamburger.textContent;
+
+// ボタンクリックイベント
+hamburger.addEventListener( 'click', () => {
+  // navにclassを追加・削除する
+  nav.classList.toggle( 'active' );
+  // 分岐：navがactiveを含むか
+  if ( nav.classList.contains('active') ) {
+    // アイコンをcloseに変更する
+    hamburger.textContent = 'close';
+  } else {
+    // アイコンを初期状態に変更する
+    hamburger.textContent = hamburgerText;
+  }
+} );
+
+// ボタンクリックイベント リンクを踏んだらclassとアイコンを初期状態に戻す
+const anchor = document.querySelectorAll( 'nav a' );
+
+anchor.forEach((anc) => {
+  anc.addEventListener( 'click', () => {
+    hamburger.textContent = hamburgerText;
+    nav.classList.remove( 'active' );
+  } );
+});
