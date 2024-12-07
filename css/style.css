@@ -97,6 +97,7 @@
 
   #work-wrap {
     align-items: flex-start;
+    flex-wrap: wrap;
   }
 
   .work {
